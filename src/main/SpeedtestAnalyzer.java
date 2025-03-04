@@ -1,6 +1,5 @@
 package main;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,18 +7,21 @@ import java.util.Scanner;
 
 public class SpeedtestAnalyzer {
     public static void main(String[] args) throws FileNotFoundException {
-        JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
         String directoryString = null;
-
-        boolean valid = false;
-        while (!valid) {
-            int result = fc.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                directoryString = String.valueOf(fc.getSelectedFile());
-                valid = true;
+        boolean parameters = false;
+        if (args.length > 1) {
+            if (args[0].equals("-d")) {
+                if (!(args[1].isBlank())) {
+                    directoryString = args[1];
+                    parameters = true;
+                }
             }
+        }
+
+        if (!parameters) {
+            Scanner scnr = new Scanner(System.in);
+            System.out.print("Enter a valid path: ");
+            directoryString = scnr.nextLine();
         }
 
         assert directoryString != null;

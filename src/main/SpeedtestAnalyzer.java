@@ -12,9 +12,14 @@ public class SpeedtestAnalyzer {
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         String directoryString = null;
-        int result = fc.showOpenDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            directoryString = String.valueOf(fc.getSelectedFile());
+
+        boolean valid = false;
+        while (!valid) {
+            int result = fc.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                directoryString = String.valueOf(fc.getSelectedFile());
+                valid = true;
+            }
         }
 
         assert directoryString != null;
